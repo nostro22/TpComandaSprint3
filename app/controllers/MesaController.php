@@ -114,6 +114,15 @@ class MesaController extends Mesa implements IApiUsable
     return $response
       ->withHeader('Content-Type', 'application/json');
   }
+  public function TraerMesaMenosUsada($request, $response, $args)
+  {    
+    $mesaMasUsada = Mesa::obtenerMesaMenosUsada();
+     
+    $payload = json_encode($mesaMasUsada);
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
 
   //Compara el id del mozo asociado a la mesa coincida con el proporcionado por el token 
   //Actualiza todas la mesas que esten lista para cobrar

@@ -2850,7 +2850,7 @@
 					"response": []
 				},
 				{
-					"name": "socio mesa Mas Usada",
+					"name": "socio peores comentarios",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -2909,6 +2909,80 @@
 							]
 						},
 						"url": {
+							"raw": "http://localhost:666/socio/peorComentarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"socio",
+								"peorComentarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "socio mesa Mas Usada",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Njk2NDc2MjksImV4cCI6MTY2OTcwNzYyOSwiYXVkIjoiN2Q0MzIxMWYwOGIyYzA4NjRhMzQ2MGU3NGE3MjNmYzY3MDA2MjA0OSIsImRhdGEiOnsibm9tYnJlIjoiZWR1YXJkbyIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWQiOjN9LCJhcHAiOiJUZXN0IEpXVCJ9.f2JY08KEkpwz3yfHmhXD5zYRUM-GQszoou_k-KLjgX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "penelope",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "todos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "listos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre_usuario",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "eduardo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "clave",
+									"value": "eduardoclave",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
 							"raw": "http://localhost:666/socio/mesa/masUsada",
 							"protocol": "http",
 							"host": [
@@ -2919,6 +2993,381 @@
 								"socio",
 								"mesa",
 								"masUsada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "socio mesa Menos Usada",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Njk2NDc2MjksImV4cCI6MTY2OTcwNzYyOSwiYXVkIjoiN2Q0MzIxMWYwOGIyYzA4NjRhMzQ2MGU3NGE3MjNmYzY3MDA2MjA0OSIsImRhdGEiOnsibm9tYnJlIjoiZWR1YXJkbyIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWQiOjN9LCJhcHAiOiJUZXN0IEpXVCJ9.f2JY08KEkpwz3yfHmhXD5zYRUM-GQszoou_k-KLjgX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "penelope",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "todos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "listos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre_usuario",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "eduardo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "clave",
+									"value": "eduardoclave",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/socio/mesa/menosUsada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"socio",
+								"mesa",
+								"menosUsada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "socio cantidad Operaciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Njk2NDc2MjksImV4cCI6MTY2OTcwNzYyOSwiYXVkIjoiN2Q0MzIxMWYwOGIyYzA4NjRhMzQ2MGU3NGE3MjNmYzY3MDA2MjA0OSIsImRhdGEiOnsibm9tYnJlIjoiZWR1YXJkbyIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWQiOjN9LCJhcHAiOiJUZXN0IEpXVCJ9.f2JY08KEkpwz3yfHmhXD5zYRUM-GQszoou_k-KLjgX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "penelope",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "todos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "listos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre_usuario",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "eduardo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "clave",
+									"value": "eduardoclave",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/socio/area/operaciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"socio",
+								"area",
+								"operaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "socio venta mas vendido",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Njk2NDc2MjksImV4cCI6MTY2OTcwNzYyOSwiYXVkIjoiN2Q0MzIxMWYwOGIyYzA4NjRhMzQ2MGU3NGE3MjNmYzY3MDA2MjA0OSIsImRhdGEiOnsibm9tYnJlIjoiZWR1YXJkbyIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWQiOjN9LCJhcHAiOiJUZXN0IEpXVCJ9.f2JY08KEkpwz3yfHmhXD5zYRUM-GQszoou_k-KLjgX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "penelope",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "todos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "listos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre_usuario",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "eduardo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "clave",
+									"value": "eduardoclave",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/socio/venta/masVendido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"socio",
+								"venta",
+								"masVendido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "socio venta menos vendidos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Njk2NDc2MjksImV4cCI6MTY2OTcwNzYyOSwiYXVkIjoiN2Q0MzIxMWYwOGIyYzA4NjRhMzQ2MGU3NGE3MjNmYzY3MDA2MjA0OSIsImRhdGEiOnsibm9tYnJlIjoiZWR1YXJkbyIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIiwiaWQiOjN9LCJhcHAiOiJUZXN0IEpXVCJ9.f2JY08KEkpwz3yfHmhXD5zYRUM-GQszoou_k-KLjgX8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "penelope",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "todos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "listos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre_usuario",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "eduardo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "clave",
+									"value": "eduardoclave",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/socio/venta/menosVendido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"socio",
+								"venta",
+								"menosVendido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedir Producto Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjgyNjg1NjAsImV4cCI6MTY2ODMyODU2MCwiYXVkIjoiN2Q0MzIxMWYwOGIyYzA4NjRhMzQ2MGU3NGE3MjNmYzY3MDA2MjA0OSIsImRhdGEiOnsibm9tYnJlIjoiZWR1YXJkbyIsInRpcG8iOiJhZG1pbmlzdHJhZG9yIn0sImFwcCI6IlRlc3QgSldUIn0.r3HGkyexESmXjW5DA2YeyJfpCDukchXyKNkNh90sUJo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "penelope",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "todos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "estado",
+									"value": "listos",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "nombre_usuario",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "eduardo",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "clave",
+									"value": "eduardoclave",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:666/productos/listar/cancelado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"productos",
+								"listar",
+								"cancelado"
 							]
 						}
 					},

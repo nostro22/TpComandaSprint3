@@ -113,7 +113,6 @@ class Login
                 if (!empty($line)) {
                     $line = str_replace(PHP_EOL, "", $line);
                     $loginsArray = explode(",", $line);
-                    var_dump($loginsArray);
                     Login::crearLoginLocal($loginsArray[0], $loginsArray[1], $loginsArray[2]);
                 }
             }

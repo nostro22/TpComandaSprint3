@@ -73,6 +73,17 @@ class Encuesta
         }
         return $Encuesta;
     }
+    public static function obtenerPeoresComentarios()
+    {        
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT comentario FROM Encuestas WHERE promedio_calificacion < 3");
+        $consulta->execute();
+        $Encuesta =$consulta->fetchAll(PDO::FETCH_COLUMN, 0);
+        if(is_null($Encuesta)){
+            throw new Exception("Encuesta no econtrado");
+        }
+        return $Encuesta;
+    }
 
     public static function modificarEncuesta($Encuesta)
     {

@@ -47,6 +47,28 @@ class Orden
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Orden');
     }
+    public static function obtenerMasVendido()
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT productos.descripcion ,  count(*) as veces FROM productos  
+        GROUP BY productos.descripcion 
+        HAVING COUNT(*)>1
+        ORDER BY veces DESC
+        LIMIT 3;");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function obtenerMenosVendido()
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT productos.descripcion ,  count(*) as veces FROM productos  
+        GROUP BY productos.descripcion 
+        HAVING COUNT(*)>1
+        ORDER BY veces ASC
+        LIMIT 3;");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public static function obtenerOrden($id)
     {        

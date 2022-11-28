@@ -1,5 +1,6 @@
 <?php
 //eduardo
+require_once './models/Orden.php';
 class Producto
 {
     public $id;
@@ -89,6 +90,19 @@ class Producto
         $consulta->bindValue(':tiempo_entrega', $tiempo_entrega, PDO::PARAM_STR);
         $consulta->execute();
     }
+    public static function ServidoProductosPorOrden($codigo_orden)
+    {
+      
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+            $consulta = $objAccesoDato->prepararConsulta("UPDATE productos 
+        SET 
+        estado = :estado        
+        WHERE id_orden_asociada = :id_orden_asociada",);
+        $consulta->bindValue(':estado', "servido", PDO::PARAM_STR);
+        $consulta->bindValue(':id_orden_asociada',$codigo_orden , PDO::PARAM_STR);
+        $consulta->execute();
+        
+    }
 
 
     public static function borrarProducto($id)
@@ -145,5 +159,6 @@ class Producto
        
         return $Producto;
     }
+ 
 
 }

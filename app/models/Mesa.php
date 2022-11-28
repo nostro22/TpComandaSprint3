@@ -57,6 +57,14 @@ class Mesa
         $Mesa =$consulta->fetchObject();
         return $Mesa;
     }
+    public static function obtenerMesaMenosUsada()
+    {        
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id_mesa as codigo , COUNT(id_mesa) AS Usada FROM ordenes GROUP BY id_mesa ORDER BY Usada ASC LIMIT 1");
+        $consulta->execute();
+        $Mesa =$consulta->fetchObject();
+        return $Mesa;
+    }
 
     public static function modificarMesa($Mesa)
     {

@@ -111,9 +111,14 @@ $app->group(
   $group->get('/mesas',\MesaController::class . ':TraerTodos')->add(\MWAceso::class . ':esAdministrador');
   $group->put('/cerrar',\MesaController::class . ':CerrarMesasCobradas')->add(\MWAceso::class . ':esAdministrador');
   $group->get('/mejorComentarios',\EncuestaController::class . ':TraerMejoresComentarios')->add(\MWAceso::class . ':esAdministrador');
+  $group->get('/peorComentarios',\EncuestaController::class . ':TraerPeoresComentarios')->add(\MWAceso::class . ':esAdministrador');
   $group->get('/mesa/masUsada',\MesaController::class . ':TraerMesaMasUsada')->add(\MWAceso::class . ':esAdministrador');
+  $group->get('/mesa/menosUsada',\MesaController::class . ':TraerMesaMenosUsada')->add(\MWAceso::class . ':esAdministrador');
   $group->get('/login/generar',\LoginController::class . ':generarCsv')->add(\MWAceso::class . ':esAdministrador');
   $group->post('/login/leerCsv',\LoginController::class . ':ActualizarLoginsUsandoCsv')->add(\MWAceso::class . ':esAdministrador');
+  $group->get('/area/operaciones',\OrdenController::class . ':getCantidadOperacionesPorSector')->add(\MWAceso::class . ':esAdministrador');
+  $group->get('/venta/masVendido',\OrdenController::class . ':MasVendido')->add(\MWAceso::class . ':esAdministrador');
+  $group->get('/venta/menosVendido',\OrdenController::class . ':MenosVendido')->add(\MWAceso::class . ':esAdministrador');
 });
 
 

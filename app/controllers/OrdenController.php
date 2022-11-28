@@ -95,13 +95,10 @@ class OrdenController extends Orden implements IApiUsable
       $codigo_mesa = $args['codigo_mesa'];
     }
 
-    $demora = ProductoController::obtenerMaxProductoDemoraOrden($codigo_orden,$codigo_mesa);
-    if(isset($demora))
-    {
+    $demora = ProductoController::obtenerMaxProductoDemoraOrden($codigo_orden, $codigo_mesa);
+    if (isset($demora)) {
       $payload = json_encode(array("Pedido listo en aproximadamente" => $demora . " minutos"));
-    }
-    else
-    {
+    } else {
       $payload = json_encode(array("Pedido no encontrado" => "verifique codigos"));
     }
     $response->getBody()->write($payload);
@@ -112,16 +109,15 @@ class OrdenController extends Orden implements IApiUsable
   {
     $lista = Orden::obtenerTodos();
     $estado = "listo para servir";
-  
+
     $new_array = array_filter($lista, function ($obj) use ($estado) {
       if (isset($obj)) {
-          if ($estado == $obj->estado) {
-              return false;
-          }
-          else{
-            return true;
-          }
+        if ($estado == $obj->estado) {
+          return false;
+        } else {
+          return true;
         }
+      }
     });
     Orden::imprimirOrdensConDemora($new_array);
     $payload = json_encode(array("listaOrden" => $new_array));
@@ -207,9 +203,9 @@ class OrdenController extends Orden implements IApiUsable
     //cargo los pedidos
     ProductoController::CargarArrayDeProductos($pedidos, $codigoMesa);
     //Cambio el estado de la mesa a "con cliente esperando pedido"
-    $idDelMozo =$user->id;
+    $idDelMozo = $user->id;
     $mesa = new Mesa();
-    $mesa->id=substr($id_mesa,2);
+    $mesa->id = substr($id_mesa, 2);
     $mesa->estado = "con cliente esperando pedido";
     $mesa->id_personal = $idDelMozo;
     MesaController::modificarMesa($mesa);
@@ -240,34 +236,104 @@ class OrdenController extends Orden implements IApiUsable
       ->withHeader('Content-Type', 'application/json');
   }
 
-  public function getOrdenLista($request, $response, $args){
-    $listaOrdenes= self::obtenerTodos();
-     $listaPedidos = Producto::obtenerTodos();
-     $listaPedidosListos =[];
-     foreach ($listaOrdenes as $orden) { 
-       $todos = true;
-       foreach ($listaPedidos as $pedido) {
-         $codigo = $orden->prefix . sprintf("%03d", $orden->id);
-         if($codigo == $pedido->id_orden_asociada && $pedido->estado != "Listo para servir")
-         {
-           $todos = false;
-           break;
-          }
+  public function getOrdenLista($request, $response, $args)
+  {
+    $listaOrdenes = self::obtenerTodos();
+    $listaPedidos = Producto::obtenerTodos();
+    $listaPedidosListos = [];
+    foreach ($listaOrdenes as $orden) {
+      $todos = true;
+      foreach ($listaPedidos as $pedido) {
+        $codigo = $orden->prefix . sprintf("%03d", $orden->id);
+        if ($codigo == $pedido->id_orden_asociada && $pedido->estado != "Listo para servir") {
+          $todos = false;
+          break;
         }
-        if($todos)
-        {
-          if( $mesa = Mesa::obtenerMesa(substr($orden->id_mesa,2)))
-          {
-            $orden->estado ="servido";
-            Orden::modificarOrden($orden);
-            $mesa->estado ="con cliente comiendo" ;
-            Mesa::modificarMesa($mesa);
-            $orden->id =sprintf("%03d", $orden->id);
-            array_push($listaPedidosListos,$orden);
-          }
-         }
+      }
+      if ($todos) {
+        if ($mesa = Mesa::obtenerMesa(substr($orden->id_mesa, 2))) {
+          $orden->estado = "servido";
+          $codigo = $orden->prefix . sprintf("%03d", $orden->id);
+          Producto::ServidoProductosPorOrden($codigo);
+          Orden::modificarOrden($orden);
+          $mesa->estado = "con cliente comiendo";
+          Mesa::modificarMesa($mesa);
+          $orden->id = sprintf("%03d", $orden->id);
+          array_push($listaPedidosListos, $orden);
+        }
+      }
+    }
+    $response->getBody()->write(json_encode($listaPedidosListos));
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
+  public function getCantidadOperacionesPorSector($request, $response, $args){
+    $listaOrdenes= Orden::obtenerTodos();
+     $listaPedidos = Producto::obtenerTodos();
+     $cantCocina = 0;
+     $cantBarraTragos =0;
+     $cantBarraChoperas =0;
+     $cantPostres =0;
+     $cantMozo =0;
+     foreach ($listaOrdenes as $orden) { 
+      if($orden->estado=="pendiente")
+      {
+        $cantMozo +=1;
+      }
+      else if($orden->estado=="servido"){
+        $cantMozo+=3;
+      }
      }
-     $response->getBody()->write(json_encode($listaPedidosListos));
+     foreach ($listaPedidos as $pedido) { 
+      if($pedido->estado=="en preparacion")
+      {
+          if($pedido->area == "cocina")
+          {
+            $cantCocina+=1;
+          }
+          else if ( $pedido->area =="Barra de choperas")
+          {
+            $cantBarraChoperas+=1;
+          }
+          else if($pedido->area=="Barra de tragos"){
+            $cantBarraTragos+=1;
+          }
+          else{
+            $cantPostres+=1;
+          }
+      }
+      else if($pedido->estado=="listo para servir" || $pedido->estado=="servido" ){
+        if($pedido->area == "cocina")
+          {
+            $cantCocina+=2;
+          }
+          else if ( $pedido->area =="Barra de choperas")
+          {
+            $cantBarraChoperas+=2;
+          }
+          else if($pedido->area=="Barra de tragos"){
+            $cantBarraTragos+=2;
+          }
+          else{
+            $cantPostres+=2;
+          }
+      }
+     }
+     $response->getBody()->write(json_encode(array("Cocina"=>$cantCocina, "Choperas"=>$cantBarraChoperas, "Tragos"=>$cantBarraTragos, "postres"=>$cantPostres, "Mozos"=>$cantMozo)));
+     return $response
+     ->withHeader('Content-Type', 'application/json');
+ }
+  public function MasVendido($request, $response, $args){
+    
+    $mayorVenta = Orden::obtenerMasVendido();
+     $response->getBody()->write(json_encode($mayorVenta));
+     return $response
+     ->withHeader('Content-Type', 'application/json');
+ }
+  public function MenosVendido($request, $response, $args){
+    
+    $menorVenta = Orden::obtenerMenosVendido();
+     $response->getBody()->write(json_encode($menorVenta));
      return $response
      ->withHeader('Content-Type', 'application/json');
  }
